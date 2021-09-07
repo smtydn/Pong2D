@@ -19,6 +19,19 @@ public class BallMovement : MonoBehaviour
         if (coll.collider.name == "UpperBound" || coll.collider.name == "LowerBound")
         {
             direction.y *= -1;
+            return;
         }
+
+        // If the ball hits the right or the left boundary, then it is a score.
+        if (coll.collider.name == "RightBound")
+        {
+            GameManager.instance.IncrementPlayerScore();   
+        }
+        else
+        {
+            GameManager.instance.IncrementEnemyScore();
+        }
+        // After scoring, scene should be restarted.
+        GameManager.instance.Restart();
     }
 }

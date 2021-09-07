@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-    public float speed = 2;
+    public float speed = 200;
 
-    private void Start()
-    {
-        Vector3 randomDirection = new Vector3(Random.value, Random.value, Random.value);
-        transform.Rotate(randomDirection);
-    }
-
+    private Vector3 direction = new Vector3(1, 1, 0);
+    
     private void FixedUpdate()
     {
-        transform.position += Vector3.one * speed;
+        transform.Translate(direction * Time.deltaTime * speed);
+    }
+
+    private void OnCollisionEnter2D(Collision2D coll)
+    {
+        // Bounce from upper and lower bounds
+        if (coll.collider.name == "UpperBound" || coll.collider.name == "LowerBound")
+        {
+            direction.y *= -1;
+        }
     }
 }

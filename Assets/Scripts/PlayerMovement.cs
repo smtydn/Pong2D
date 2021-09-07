@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 10;
     // Update is called once per frame
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         float translation = Input.GetAxis("Vertical");
 

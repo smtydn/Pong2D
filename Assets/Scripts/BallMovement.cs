@@ -23,15 +23,23 @@ public class BallMovement : MonoBehaviour
         }
 
         // If the ball hits the right or the left boundary, then it is a score.
+        // Increment the player's score and restart the scene.
         if (coll.collider.name == "RightBound")
         {
-            GameManager.instance.IncrementPlayerScore();   
+            GameManager.instance.IncrementPlayerScore();
+            GameManager.instance.Restart();
         }
-        else
+        else if (coll.collider.name == "LeftBound")
         {
             GameManager.instance.IncrementEnemyScore();
+            GameManager.instance.Restart();
         }
-        // After scoring, scene should be restarted.
-        GameManager.instance.Restart();
+
+        // If the ball is hit by the enemy or by the player, then 
+        // rotate it to the counter direction.
+        if (coll.collider.tag == "Player")
+        {
+            direction.x *= -1;
+        }
     }
 }

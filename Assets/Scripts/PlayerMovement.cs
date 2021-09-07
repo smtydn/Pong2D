@@ -8,8 +8,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     protected virtual void FixedUpdate()
     {
-        float translation = Input.GetAxis("Vertical");
+        if (transform.position.y >= -300 && transform.position.y <= 300)
+        {
+            float translation = Input.GetAxis("Vertical");
+            transform.position += new Vector3(0, translation * speed, 0);
+        }
 
-        transform.position += new Vector3(0, translation * speed, 0);
     }
 }

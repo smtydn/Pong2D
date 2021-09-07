@@ -5,6 +5,7 @@ using UnityEngine;
 public class BallMovement : MonoBehaviour
 {
     public float speed = 200;
+    public float speedIncrement = 5;
 
     private Vector3 direction = new Vector3(1, 1, 0);
     
@@ -15,6 +16,9 @@ public class BallMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
+        // Make the ball faster on every collision
+        speed += speedIncrement;
+
         // Bounce from upper and lower bounds
         if (coll.collider.name == "UpperBound" || coll.collider.name == "LowerBound")
         {
